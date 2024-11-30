@@ -25,7 +25,7 @@ public class MovieController {
 //Tìm kiếm
     @GetMapping("/find/{keyword}")
     public List<Movie> findMovie(@PathVariable("keyword") String keyword) {
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
         movies.addAll(movieService.searchMoviesByTitle(keyword));
         movies.addAll(movieService.searchMoviesByGenre(keyword));
         movies.addAll(movieService.searchMoviesByActor(keyword));
@@ -64,6 +64,5 @@ public class MovieController {
     public void deleteMovie(@PathVariable("movieId") int movieId) {
         movieService.deleteMovie(movieId);
     }
-
 
 }

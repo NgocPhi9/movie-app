@@ -30,7 +30,9 @@ public class SecurityConfiguration {
                                 .requestMatchers("/movies-app/login", "movies-app/register",
                                         "/movies-app/film", "/movies-app/series",
                                         "/movies-app/find/**", "/movies-app/movie/**",
-                                        "/movies-app/reviews/**", "/movies-app/homepage").permitAll()
+                                        "/movies-app/reviews/**", "/movies-app/homepage",
+                                        "/movies-app/top-reviews", "/movies-app/top-views",
+                                        "/movies-app/top-wishlist", "/movies-app/top-recent-release").permitAll()
                                 .requestMatchers("/movies-app/admin/**").hasAnyAuthority("ADMIN")
                                 .requestMatchers("/movies-app/user/**").hasAnyAuthority("USER")
                                 .requestMatchers("/movies-app/user-admin/**").hasAnyAuthority("ADMIN", "USER")

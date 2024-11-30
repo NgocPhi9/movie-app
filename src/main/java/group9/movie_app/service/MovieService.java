@@ -21,7 +21,11 @@ public class MovieService {
     }
 
     public Movie getMovieById(int id) {
-        return movieRepository.findById(id).orElse(null);
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+        movie.setViews(movie.getViews() + 1);
+        movieRepository.save(movie);
+        return movie;
     }
 
     public List<Movie> searchMoviesByTitle(String title) {
@@ -75,7 +79,5 @@ public class MovieService {
     public void deleteMovie(int movieId) {
         movieRepository.deleteById(movieId);
     }
-
-
 
 }

@@ -32,4 +32,5 @@ public class Movie {
     private String description;
     private String genres;
     private String type;
+    private long views;
 }

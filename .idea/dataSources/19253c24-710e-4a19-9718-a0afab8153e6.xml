@@ -1023,7 +1023,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="295" parent="1" name="movies_app">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-11-21.12:16:56</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-11-29.06:13:48</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="296" parent="1" name="murach_user">
@@ -1066,6 +1066,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="305" parent="301" name="movieId">
+      <AutoIncrement>9</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1106,7 +1107,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>10</Position>
       <StoredType>varchar(10)|0s</StoredType>
     </column>
-    <column id="315" parent="301" name="column_name">
+    <column id="315" parent="301" name="views">
+      <DefaultExpression>0</DefaultExpression>
       <Position>11</Position>
       <StoredType>int|0s</StoredType>
     </column>
@@ -1121,9 +1123,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="318" parent="302" name="reviewId">
+      <DefaultExpression>(uuid())</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>varchar(36)|0s</StoredType>
     </column>
     <column id="319" parent="302" name="userId">
       <NotNull>1</NotNull>
@@ -1151,6 +1154,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </foreign-key>
     <foreign-key id="324" parent="302" name="review_movie">
       <ColNames>movieId</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>movieId</RefColNames>
       <RefTableName>movie</RefTableName>
     </foreign-key>
@@ -1178,6 +1182,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="330" parent="303" name="email">
+      <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
@@ -1186,10 +1191,12 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
     <column id="332" parent="303" name="password">
+      <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="333" parent="303" name="role">
+      <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
@@ -1204,9 +1211,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="336" parent="304" name="wishlistId">
+      <DefaultExpression>(uuid())</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>varchar(36)|0s</StoredType>
     </column>
     <column id="337" parent="304" name="userId">
       <NotNull>1</NotNull>
@@ -1218,35 +1226,31 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="339" parent="304" name="column_name">
-      <Position>4</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <foreign-key id="340" parent="304" name="wishlist_ibfk_2">
+    <foreign-key id="339" parent="304" name="wishlist_ibfk_2">
       <ColNames>userId</ColNames>
       <RefColNames>userId</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="341" parent="304" name="wishlist_movie">
+    <foreign-key id="340" parent="304" name="wishlist_movie">
       <ColNames>movieId</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>movieId</RefColNames>
       <RefTableName>movie</RefTableName>
     </foreign-key>
-    <index id="342" parent="304" name="PRIMARY">
+    <index id="341" parent="304" name="PRIMARY">
       <ColNames>wishlistId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="343" parent="304" name="userId">
+    <index id="342" parent="304" name="userId">
       <ColNames>userId</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="344" parent="304" name="wishlist_movie">
+    <index id="343" parent="304" name="wishlist_movie">
       <ColNames>movieId</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="345" parent="304" name="PRIMARY">
+    <key id="344" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
