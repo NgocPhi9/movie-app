@@ -38,6 +38,16 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             nativeQuery = true)
     List<Object[]> findTopGenresByViews();
 
+    @Query(value = "SELECT genre, COUNT(w.wishlistId) AS wishlist_count " +
+    "FROM (SELECT m.movieId, TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(m.genres, ',', n.n), ',', -1)) AS genre " +
+    "FROM movie m " +
+    "JOIN (SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) n " +
+    "ON n.n <= 1 + LENGTH(m.genres) - LENGTH(REPLACE(m.genres, ',', ''))) g " +
+    "LEFT JOIN wishlist w ON w.movieId = g.movieId " +
+    "GROUP BY genre " +
+    "ORDER BY wishlist_count DESC", nativeQuery = true)
+    List<Object[]> findTopGenresByWishlist();
+
     @Query("SELECT m, COUNT(r) AS reviewCount " +
             "FROM Review r JOIN r.movie m " +
             "GROUP BY m.movieId " +
