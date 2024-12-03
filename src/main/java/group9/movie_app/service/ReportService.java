@@ -82,7 +82,7 @@ public class ReportService {
         return map;
     }
 
-    public Map<String, Long> getTopWishlistViews() {
+    public Map<String, Long> getTopGenresByWishlist() {
         List<Object[]> results = movieRepository.findTopGenresByWishlist();
         Map<String, Long> map = new LinkedHashMap<>();
         for (Object[] result : results) {

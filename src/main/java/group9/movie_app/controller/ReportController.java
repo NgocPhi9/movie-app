@@ -73,7 +73,7 @@ public class ReportController {
     }
 
     @GetMapping("/admin/genres-wishlist")
-    public Map<String, Long> getLeastWishlistMovies() {
-        return reportService.getTopWishlistViews();
+    public Map<String, Long> getTopGenresByWishlist() {
+        return reportService.getTopGenresByWishlist();
     }
 }
